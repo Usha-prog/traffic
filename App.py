@@ -40,7 +40,7 @@ if uploaded_file is not None:
     pos = nx.spring_layout(graph)
 
 
-    nx.draw_networkx(g, pos, partition, 
+    nx.draw_networkx(graph, pos, partition, 
                     with_labels=True, 
                     node_size = 250, 
                     node_shape = "s", 
