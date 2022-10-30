@@ -18,7 +18,7 @@ if uploaded_file is not None:
     graph = nx.karate_club_graph()
     graph = nx.from_pandas_edgelist(data,source='query_origin',target='query_destination',edge_attr=['distance(meters)','duration(minutes)']) #Use the Graph API to create an empty       network graph object
 
-    partition = nx_comm.louvain_communities(g)
+    partition = nx_comm.louvain_communities(graph)
 
     if st.button("Click here for Partition: "):
         st.write(partition, len(partition))
@@ -54,7 +54,7 @@ if uploaded_file is not None:
     #########################################
     st.info("louvain_community Partition Graph")
 
-    com = nx_comm.louvain_communities(g)
+    com = nx_comm.louvain_communities(graph)
 
     st.subheader("For louvain_communities")
     st.write("Modularity: ", nx_comm.modularity(graph, com))
