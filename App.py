@@ -15,7 +15,7 @@ uploaded_file = st.file_uploader(" ", type=['xlsx']) #Only accepts excel file fo
 if uploaded_file is not None:     
     data = pd.read_excel(uploaded_file)
     data
-    graph = nx.Graph()
+    graph = nx.karate_club_graph()
     graph = nx.from_pandas_edgelist(traffic,source='query_origin',target='query_destination',       edge_attr=['distance(meters)','duration(minutes)']) #Use the Graph API to create an empty       network graph object
 
     partition = nx_comm.louvain_communities(g)
