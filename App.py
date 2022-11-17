@@ -8,7 +8,6 @@ import networkx.algorithms.community as nx_comm
 #from community import community_louvain
 
 st.title(' Optimal traffic routes prediction for Shuttle Services ')
-st.markdown('Karate Club Graph')
 
 uploaded_file = st.file_uploader(" ", type=['xlsx']) #Only accepts excel file format
 
@@ -19,9 +18,8 @@ if uploaded_file is not None:
     graph = nx.from_pandas_edgelist(data,source='query_origin',target='query_destination',edge_attr=['distance(meters)','duration(minutes)']) #Use the Graph API to create an empty       network graph object
 
     partition = nx_comm.louvain_communities(graph)
-
-    if st.button("Click here for Partition: "):
-        st.write(partition, len(partition))
+     shortest_path = nx.shortest_path(graph)
+        
 
     color_map = []
     # color the nodes according to their partition
@@ -50,10 +48,16 @@ if uploaded_file is not None:
                     font_size = 15)
     plt.title('Louvain_communities algorithm', fontdict={'fontsize': 40})
     st.pyplot(fig)
+    df = data.loc[data.groupby(['way']).distance(meters).idxmin()]
+    Best_Route = df[["query_origin", "query_destination",'way']]
    
     #########################################
     st.info("louvain_community Partition Graph")
-
+    if st.button("Click here for Partition: "):
+         st.write(partition, len(partition))
+    if st.button("click here for Best Route"):
+          st.write(df[["query_origin", "query_destination",'way','distance(meters)']])
+            
     com = nx_comm.louvain_communities(graph)
 
     st.subheader("For louvain_communities")
