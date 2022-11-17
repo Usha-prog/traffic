@@ -61,6 +61,8 @@ if uploaded_file is not None:
     st.write("Partition Quality: ", nx_comm.partition_quality(graph, com))
     st.write("Coverage: ", nx_comm.coverage(graph, com)) 
     st.write("Performance: ", nx_comm.performance(graph, com))
+    nx.shortest_path(graph)
+    
 
     if st.button("Click to show edge betweeness centrality of graph"):
         edge_BC = nx.edge_betweenness_centrality(graph)
