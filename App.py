@@ -56,11 +56,11 @@ if uploaded_file is not None:
     st.info("louvain_community Partition Graph")
     if st.button("Click here for Partition: "):
          st.write(partition, len(partition))
+    st.info("Best Route with less traffic")
     if st.button("click here for Best Route"):
-          st.write(df[["query_origin", "query_destination",'way','distance_meters']])
+          st.write(df[["query_origin", "query_destination",'way','distance_meters','duration(minutes)']])
             
     com = nx_comm.louvain_communities(graph)
-
     st.subheader("For louvain_communities")
     st.write("Modularity: ", nx_comm.modularity(graph, com))
     st.write("Partition Quality: ", nx_comm.partition_quality(graph, com))
@@ -72,3 +72,4 @@ if uploaded_file is not None:
     if st.button("Click to show edge betweeness centrality of graph"):
         edge_BC = nx.edge_betweenness_centrality(graph)
         st.info(sorted(edge_BC.items(), key=lambda edge_BC : (edge_BC[1], edge_BC[0]), reverse = True))
+    st.info("Upload the Outscraper dataset and get the best route between the source and destination.Thank you. ")
