@@ -48,8 +48,9 @@ if uploaded_file is not None:
                     font_size = 15)
     plt.title('Louvain_communities algorithm', fontdict={'fontsize': 40})
     st.pyplot(fig)
-    df = data.loc[data.groupby(['way']).distance(meters).idxmin()]
-    Best_Route = df[["query_origin", "query_destination",'way']]
+    df = traffic.loc[traffic.groupby(['way']).distance_meters.idxmin()]
+    Best_Route = df[["query_origin", "query_destination","way"]]
+
    
     #########################################
     st.info("louvain_community Partition Graph")
