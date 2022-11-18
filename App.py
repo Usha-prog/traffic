@@ -15,7 +15,7 @@ if uploaded_file is not None:
     data = pd.read_excel(uploaded_file)
     data
     graph = nx.karate_club_graph()
-    graph = nx.from_pandas_edgelist(data,source='query_origin',target='query_destination',edge_attr=['distance(meters)','duration(minutes)']) #Use the Graph API to create an empty       network graph object
+    graph = nx.from_pandas_edgelist(data,source='query_origin',target='query_destination',edge_attr=['distance_meters','duration(minutes)']) #Use the Graph API to create an empty       network graph object
 
     partition = nx_comm.louvain_communities(graph)
     shortest_path = nx.shortest_path(graph)
@@ -49,7 +49,7 @@ if uploaded_file is not None:
     plt.title('Louvain_communities algorithm', fontdict={'fontsize': 40})
     st.pyplot(fig)
     df = traffic.loc[traffic.groupby(['way']).distance_meters.idxmin()]
-    Best_Route = df[["query_origin", "query_destination","way"]]
+    Best_Route = df[["query_origin", "query_destination","way","distance_meters"]]
 
    
     #########################################
@@ -57,7 +57,7 @@ if uploaded_file is not None:
     if st.button("Click here for Partition: "):
          st.write(partition, len(partition))
     if st.button("click here for Best Route"):
-          st.write(df[["query_origin", "query_destination",'way','distance(meters)']])
+          st.write(df[["query_origin", "query_destination",'way','distance_meters']])
             
     com = nx_comm.louvain_communities(graph)
 
